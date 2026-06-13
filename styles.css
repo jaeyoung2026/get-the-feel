@@ -399,3 +399,10 @@ p { margin: 0 0 14px; }
 .why-details summary::before { content: "▸ "; color: var(--ink-faint); }
 .why-details[open] summary::before { content: "▾ "; }
 .why-details .why { margin-top: 6px; }
+
+@media (max-width: 480px) {
+  .viz-wrap svg { max-height: 180px; }
+  .contrast-mini svg { max-height: 120px; }
+  .compose-mini svg { max-height: 88px; }
+  .compose-mini.big svg { max-height: 120px; }
+}

@@ -973,13 +973,11 @@
     var isLast = state.idx + 1 >= state.entries.length;
     var autoNext = loadAutoNext();
 
-    // G12 — 완성 문장(빈칸 채운 형태 또는 원문) + 그 아래 한국어 해석 ("해석" 라벨, 작게).
-    var sentenceBlock;
-    if (isWord) {
-      sentenceBlock = '<p class="filled-sentence">' + renderFilledSentence(item, answerWord) + '</p>';
-    } else {
-      sentenceBlock = '<p class="filled-sentence">' + esc(item.sentence) + '</p>';
-    }
+    // G12 — 빈칸 유형만 완성 문장 표시(채운 형태가 새 정보). sense-choice는 질문 카드 문장과
+    // 동일하므로 복제하지 않는다 (G14 — 피드백 중복 제거, 페르소나 스크롤 부담 회수).
+    var sentenceBlock = isWord
+      ? '<p class="filled-sentence">' + renderFilledSentence(item, answerWord) + '</p>'
+      : "";
     var interpBlock = item.sentence_ko
       ? '<p class="interp"><span class="interp-label">해석</span>' +
           '<span class="interp-text">' + esc(item.sentence_ko) + '</span></p>'
@@ -1019,6 +1017,13 @@
 
     document.getElementById("autonext").onchange = function () { saveAutoNext(this.checked); };
     document.getElementById("next-q").onclick = nextQuestion;
+
+    // G14 — 답한 직후 피드백(정오 + 그림)을 화면 상단으로. 질문 카드의 잠긴 보기를
+    // 다시 스크롤로 지나치지 않게 — "다음 문항"이 그림 바로 아래에서 곧장 닿는다.
+    try {
+      var head = fb.querySelector(".feedback-head");
+      if (head && head.scrollIntoView) head.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (e) { /* 무시 */ }
 
     // ---- 메타포 애니메이션 구동 (G4 > G3) ----
     if (fatigued && correct) {
