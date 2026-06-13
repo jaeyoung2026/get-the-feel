@@ -1,6 +1,6 @@
-/* get-the-feel · c4-2 — 콘텐츠 임베드 (assets/content 8파일 verbatim, 손수정 금지)
- * file:// safe — fetch 없음. app.js보다 먼저 로드. window.CONTENT_ALL 에 8키 노출.
- * c4-1과 동일 코퍼스 8파일 (have/get/take/make/keep/up/out/phrasal-up). 산출 모드는 이 코퍼스에서 파생.
+/* get-the-feel · c4-3 — 콘텐츠 임베드 (assets/content 11파일 verbatim, 손수정 금지)
+ * file:// safe — fetch 없음. app.js보다 먼저 로드. window.CONTENT_ALL 에 11키 노출.
+ * c4-2 코퍼스 8파일을 계승 + 신규 동사 3개(be/go/come). 콘텐츠 확장 후보 — 기능은 c4-2와 동일.
  */
 window.CONTENT_ALL = {
   "have": {
@@ -1705,6 +1705,940 @@ window.CONTENT_ALL = {
         "answer_index": 2,
         "sentence_ko": "규칙적인 운동은 나이 들어서도 너를 건강하게 유지해 준다.",
         "why_ko": "gets you healthy는 건강한 상태로 옮겨 가 닿는 변화(한 번 건강해짐)이고, makes you healthy는 건강한 상태를 새로 빚어내는 사역이다. well into old age는 '나이 들어서도 무너지지 않게 그 건강을 붙들어 이어 줌'을 못박으므로 keeps가 맞다 — 한 번 도달하는 get·만드는 make와 달리, 흐트러지려는 상태를 계속 붙드는 유지의 force는 keep에 있다."
+      }
+    ]
+  },
+  "be": {
+    "axis": "core-verbs",
+    "item": "be",
+    "senses": [
+      {
+        "id": "be-exist-locate",
+        "ko": "주어가 무언가를 소유하거나 어디론가 움직이는 게 아니라, 그냥 어떤 자리에 존재하거나 위치해 있다는 가장 바탕이 되는 감각.",
+        "image": "텅 빈 공간에 무언가가 '거기 있다'고 점 하나가 찍히는 그림 — There is로 존재를 무대에 올리거나, 주어가 어느 자리에 가만히 놓여 있는 그림.",
+        "boundary_ko": "There is/are는 존재 자체를 무대에 도입한다(There is a book on the table = 책이 거기 있다는 존재 도입). have는 그것이 누구의 영역 안에 속하는지를 말한다(I have a book = 책이 내 영역 안). 같은 장면도 be는 '있다(존재·위치)', have는 '~의 것(영역 내 소유)'으로 갈린다.",
+        "source_refs": [
+          {
+            "source_id": "langacker-1987",
+            "locator": "Vol. I, Ch. on stative relations — copula / existential predication (trajector at a location)",
+            "claim": "be(계사·존재 구문)는 동작이 아니라 주어가 어떤 위치·관계에 정적으로 존재함을 윤곽 짓는 가장 기본적인 정적 술어다 — 변화나 에너지 전달 없이 trajector가 landmark(자리)에 놓인 관계를 그린다."
+          }
+        ],
+        "validation": {
+          "method": "subagent-consensus",
+          "strength": "weak",
+          "date": "2026-06-13",
+          "basis": "be(계사/존재)의 정적 관계 윤곽 주장은 langacker-1987 stative relation 계열(have-domain-location과 같은 T1 축)에서 파생. 장 수준 locator(stative relation·existential)로 표기했으나 'existential there 구문'의 절·표제어 단위 정확 페이지는 미확인 — 사람 리뷰(approve 절차) 전까지 weak. there is(존재 도입) vs have(소유)의 대비는 교육용 단순화."
+        }
+      },
+      {
+        "id": "be-state",
+        "ko": "주어가 어떤 상태나 정체로 옮겨 가는 게 아니라, 지금 그 상태·정체로 가만히 머물러 있다는 정적 감각 — 계사 be가 주어와 상태를 등호로 잇는다.",
+        "image": "주어가 '피곤함'이나 '선생님'이라는 자리에 머물러 가만히 있는 그림 — 어디서 그리로 옮겨 온 움직임 없이, 지금 그 상태·정체 위에 그대로 놓여 있다.",
+        "boundary_ko": "be tired는 피곤한 상태에 '머물러 있음'(I am tired = 지금 피곤한 자리에 있음), get tired는 그 상태로 '옮겨 가 닿음'(I get tired = 피곤한 자리로 이동하는 진입 사건). be married는 부부인 상태에 머묾, get married는 그 상태로 막 진입함(c4-1 get-into-state와 연결). 시점 부사가 붙어 '~한 순간/그때'를 가리키면 머묾이 아니라 진입이라 get 쪽이다.",
+        "source_refs": [
+          {
+            "source_id": "langacker-1987",
+            "locator": "Vol. I, Ch. on stative relations — copula + adjective/nominal (predicate as a stable atemporal relation)",
+            "claim": "be + 형용사·명사(계사 술어)는 주어가 어떤 속성·정체와 맺는 안정적·비시간적(stative) 관계를 윤곽 짓는다 — 상태로의 변화가 아니라 그 상태에 머묾을 그린다."
+          },
+          {
+            "source_id": "lakoff-1993",
+            "locator": "The Contemporary Theory of Metaphor — Event Structure Metaphor (STATES ARE LOCATIONS): being in a state",
+            "claim": "상태는 위치라는 사건 구조 은유에서 be + 상태는 그 위치(상태 자리)에 '있음'을, 변화(get)는 그 위치로의 '이동'을 그린다 — be는 머묾, get은 그리로 옮겨 감의 방향 대비."
+          }
+        ],
+        "validation": {
+          "method": "subagent-consensus",
+          "strength": "weak",
+          "date": "2026-06-13",
+          "basis": "be + 상태/정체의 정적 관계 윤곽은 langacker-1987 stative relation, be(머묾) vs get(진입) 대비는 lakoff-1993 STATES ARE LOCATIONS(get.json get-state-change와 같은 T1 축)에서 파생. 장 수준 locator로 표기, 절·표제어 단위 정확 위치는 미확인 — strong 승격은 사람 리뷰 대기."
+        }
+      }
+    ],
+    "training_items": [
+      {
+        "id": "be-t1",
+        "sense_id": "be-exist-locate",
+        "sentence": "There is a small lamp on the desk.",
+        "sentence_ko": "책상 위에 작은 램프가 하나 있어.",
+        "subject_label": "a small lamp",
+        "object_label": "on the desk",
+        "type": "sense-choice",
+        "prompt": "이 There is가 그리는 그림은?",
+        "choices": [
+          "램프가 책상의 영역에 속한, 책상이 가진 물건이다",
+          "작은 램프가 책상 위 그 자리에 그냥 존재한다고 무대에 올린다",
+          "누군가 램프를 책상 위로 옮겨다 놓는 동작이다"
+        ],
+        "answer_index": 1,
+        "why_ko": "There is는 램프가 '누구의 것'인지(have)도, 옮기는 동작도 아니라, 램프가 그 자리에 존재한다는 것 자체를 무대에 올리는 그림이다. 존재·위치 도입이 be의 바탕 감각이다."
+      },
+      {
+        "id": "be-t2",
+        "sense_id": "be-exist-locate",
+        "sentence": "My keys are somewhere under the sofa.",
+        "sentence_ko": "내 열쇠가 소파 밑 어딘가에 있어.",
+        "subject_label": "my keys",
+        "object_label": "under the sofa",
+        "type": "sense-choice",
+        "prompt": "이 are가 그리는 그림은?",
+        "choices": [
+          "열쇠가 소파라는 영역 안에 속한 소파의 소유물이다",
+          "내가 열쇠를 소파 밑으로 차 넣은 동작이다",
+          "열쇠가 소파 밑 어느 자리에 그냥 놓여 존재한다"
+        ],
+        "answer_index": 2,
+        "why_ko": "be는 열쇠가 누구 것인지나 움직임이 아니라, 그것이 소파 밑 어느 자리에 존재·위치한다는 정적인 그림이다. 위치를 말할 뿐 소유(have)도 이동도 아니다."
+      },
+      {
+        "id": "be-t3",
+        "sense_id": "be-exist-locate",
+        "sentence": "There are two cafes near the station.",
+        "sentence_ko": "역 근처에 카페가 두 군데 있어.",
+        "subject_label": "two cafes",
+        "object_label": "near the station",
+        "type": "sense-choice",
+        "prompt": "이 There are가 그리는 그림으로 가장 가까운 것은?",
+        "choices": [
+          "카페 두 곳이 역 근처에 존재한다고 무대에 올린다",
+          "역이 카페 두 곳을 영역 안에 거느린 소유 관계다",
+          "카페 두 곳이 역 쪽으로 옮겨 와 자리를 잡는 중이다"
+        ],
+        "answer_index": 0,
+        "why_ko": "There are는 역이 카페를 '가졌다'(have)는 소유도, 옮겨 오는 동작도 아니라, 카페 두 곳이 그 근처에 존재한다는 사실 자체를 도입하는 그림이다."
+      },
+      {
+        "id": "be-t4",
+        "sense_id": "be-exist-locate",
+        "sentence": "The children are out in the garden right now.",
+        "sentence_ko": "아이들은 지금 정원에 나가 있어.",
+        "subject_label": "the children",
+        "object_label": "in the garden",
+        "type": "sense-choice",
+        "prompt": "이 are가 그리는 그림은?",
+        "choices": [
+          "아이들이 정원을 자기 영역으로 가지고 있다",
+          "아이들이 지금 정원이라는 자리에 존재·위치해 있다",
+          "아이들이 정원을 향해 막 뛰어 들어가는 도달의 순간이다"
+        ],
+        "answer_index": 1,
+        "why_ko": "be in the garden은 정원을 소유하거나(have) 그리로 도달하는(get) 게 아니라, 아이들이 지금 그 자리에 존재·위치해 있다는 정적인 그림이다."
+      },
+      {
+        "id": "be-t5",
+        "sense_id": "be-state",
+        "sentence": "My grandfather is a retired fisherman.",
+        "sentence_ko": "우리 할아버지는 은퇴한 어부야.",
+        "subject_label": "my grandfather",
+        "object_label": "a retired fisherman",
+        "type": "sense-choice",
+        "prompt": "이 is가 그리는 그림은? (주어와 정체를 잇는다)",
+        "choices": [
+          "할아버지가 어부라는 직업을 영역 안에 소유물처럼 지니고 있다",
+          "할아버지가 막 어부라는 신분으로 옮겨 가 그 자리에 닿았다",
+          "할아버지가 은퇴한 어부라는 정체로 지금 그대로 머물러 있다"
+        ],
+        "answer_index": 2,
+        "why_ko": "be a fisherman은 직업을 '가진'(have) 것도, 그 신분으로 '옮겨 간'(get) 사건도 아니라, 할아버지가 그 정체와 등호로 이어져 그대로 머물러 있다는 계사의 정적 감각이다."
+      },
+      {
+        "id": "be-t6",
+        "sense_id": "be-state",
+        "sentence": "The soup is still warm enough to eat.",
+        "sentence_ko": "수프가 아직 먹을 만큼 따뜻해.",
+        "subject_label": "the soup",
+        "object_label": "warm",
+        "type": "sense-choice",
+        "prompt": "이 is warm이 그리는 그림으로 가장 가까운 것은?",
+        "choices": [
+          "수프가 따뜻한 상태로 지금 그대로 머물러 있다",
+          "수프가 따뜻한 상태로 막 옮겨 가 그 자리에 닿는 변화다",
+          "수프가 따뜻함을 영역 안에 담아 가지고 있다"
+        ],
+        "answer_index": 0,
+        "why_ko": "be warm은 따뜻한 상태로 '옮겨 가 닿는'(get warm) 변화가 아니라, 지금 그 상태에 그대로 머물러 있다는 정적 그림이다. still(아직)이 변화가 아닌 머묾을 가리킨다."
+      },
+      {
+        "id": "be-t7",
+        "sense_id": "be-state",
+        "sentence": "She is quite nervous before every exam.",
+        "sentence_ko": "그녀는 시험 때마다 꽤 긴장해.",
+        "subject_label": "she",
+        "object_label": "nervous",
+        "type": "sense-choice",
+        "prompt": "이 is nervous가 그리는 그림은?",
+        "choices": [
+          "그녀가 긴장이라는 감정을 영역 안에 가지고 있다",
+          "그녀가 긴장한 상태로 막 옮겨 가 그 자리에 닿는 진입 사건이다",
+          "그녀가 시험 때마다 긴장한 상태에 그대로 놓여 머문다"
+        ],
+        "answer_index": 2,
+        "why_ko": "be nervous는 긴장한 상태로 '진입하는'(get nervous) 사건이 아니라, 시험 때마다 그 상태에 머물러 있다는 정적 그림이다. 진입의 순간이 아니라 머무는 상태를 그린다."
+      },
+      {
+        "id": "be-t8",
+        "sense_id": "be-exist-locate",
+        "sentence": "There ___ a long crack in the old ceiling.",
+        "sentence_ko": "오래된 천장에 긴 금이 하나 가 있어.",
+        "subject_label": "a long crack",
+        "object_label": "in the ceiling",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (둘 다 문법은 되지만 그림이 다르다)",
+        "choices": [
+          "has",
+          "is",
+          "makes"
+        ],
+        "answer_index": 1,
+        "why_ko": "There is는 금이 천장에 '존재한다'고 무대에 올리는 그림이다. The ceiling has a crack(천장이 금을 영역 안에 가짐)도 문법은 되지만, There ___ 틀은 존재 도입이라 has가 들어갈 자리가 아니다 — 존재 자체를 세우는 is가 맞다. makes는 금을 새로 만들어 낸다는 제작이라 그림이 다르다. be(존재 도입)·have(영역 내 소유)·make(제작)의 감각 대비."
+      },
+      {
+        "id": "be-t9",
+        "sense_id": "be-state",
+        "sentence": "By midnight everyone ___ fast asleep in the cabin.",
+        "sentence_ko": "자정 무렵엔 다들 오두막에서 곤히 잠들어 있었어.",
+        "subject_label": "everyone",
+        "object_label": "asleep",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (둘 다 문법은 되지만 그림이 다르다)",
+        "choices": [
+          "was",
+          "got",
+          "had"
+        ],
+        "answer_index": 0,
+        "why_ko": "got asleep은 결합 자체가 부자연스럽다 — 영어는 '잠드는' 진입을 fall asleep이나 get to sleep으로 말하지 get asleep으로 쓰지 않는다. had asleep도 비문이다. 그 위에 감각으로 봐도, By midnight everyone was asleep은 자정 무렵 모두가 '잠든 상태에 머물러 있던' 정지 화면이라 머묾을 그리는 be가 맞다 — by midnight은 그 시각의 상태를 묻는 머묾 표현이다. be(상태에 머묾)·get(상태로 진입)의 대비이되, 여기선 get 쪽 결합 자체가 서지 않는다."
+      },
+      {
+        "id": "be-t10",
+        "sense_id": "be-state",
+        "sentence": "He ___ angry the whole evening after the argument.",
+        "sentence_ko": "그는 말다툼 뒤로 저녁 내내 화가 나 있었어.",
+        "subject_label": "he",
+        "object_label": "angry",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (둘 다 문법은 되지만 그림이 다르다)",
+        "choices": [
+          "got",
+          "was",
+          "kept"
+        ],
+        "answer_index": 1,
+        "why_ko": "the whole evening(저녁 내내)은 화난 상태가 '쭉 이어진 머묾'을 가리키므로 그 상태에 머물러 있음을 그리는 was가 맞다. got angry는 화난 상태로 '막 옮겨 가 닿는' 한 순간의 진입이라 '내내'와 안 어울리고, kept angry는 비문에 가깝다(머물려면 stayed angry). be(상태에 머묾)·get(상태로의 진입)의 대비 — 지속을 가리키는 부사가 머묾 쪽을 못박는다."
+      }
+    ],
+    "transfer_items": [
+      {
+        "id": "be-x1",
+        "sense_id": "be-exist-locate",
+        "sentence": "There is plenty of room for everyone in the back.",
+        "sentence_ko": "뒤쪽에 다들 앉을 자리가 넉넉히 있어.",
+        "subject_label": "plenty of room",
+        "object_label": "in the back",
+        "type": "sense-choice",
+        "prompt": "추상적인 '여유 공간'을 두고 쓴 이 There is의 감각은?",
+        "choices": [
+          "넉넉한 공간이 뒤쪽에 존재한다고 무대에 올린다",
+          "뒤쪽 좌석이 그 공간을 영역 안에 소유하고 있다",
+          "사람들이 뒤쪽 공간을 향해 옮겨 가 자리를 채운다"
+        ],
+        "answer_index": 0,
+        "why_ko": "room(여유 공간)처럼 손에 잡히지 않는 것도 be는 '누구의 것'(have)이나 이동이 아니라, 그것이 그 자리에 존재한다고 도입하는 그림으로 그린다. 추상물의 존재도 be의 같은 도식이다."
+      },
+      {
+        "id": "be-x2",
+        "sense_id": "be-exist-locate",
+        "sentence": "The nearest hospital is twenty minutes away by car.",
+        "sentence_ko": "가장 가까운 병원도 차로 20분 거리야.",
+        "subject_label": "the nearest hospital",
+        "object_label": "twenty minutes away",
+        "type": "sense-choice",
+        "prompt": "거리를 두고 쓴 이 is의 그림으로 가장 가까운 것은?",
+        "choices": [
+          "병원이 20분이라는 시간을 영역 안에 가지고 있다",
+          "병원이 차로 20분 떨어진 그 위치에 자리해 존재한다",
+          "병원이 20분 거리 쪽으로 옮겨 가 막 닿았다"
+        ],
+        "answer_index": 1,
+        "why_ko": "be ... away는 병원이 20분을 '가진'(have) 것도 이동도 아니라, 그것이 그만큼 떨어진 자리에 위치해 존재한다는 정적 그림이다. 위치를 거리로 말해도 be의 존재·위치 감각은 같다."
+      },
+      {
+        "id": "be-x3",
+        "sense_id": "be-state",
+        "sentence": "The instructions were unclear to most of the students.",
+        "sentence_ko": "그 설명은 대부분의 학생에게 불분명했어.",
+        "subject_label": "the instructions",
+        "object_label": "unclear",
+        "type": "sense-choice",
+        "prompt": "추상 주어와 속성을 잇는 이 were의 그림은?",
+        "choices": [
+          "설명이 불분명한 상태로 막 옮겨 가 그 자리에 닿는 변화다",
+          "설명이 불분명함이라는 성질을 영역 안에 가지고 있다",
+          "설명이 불분명한 상태로 학생들에게 그대로 놓여 머문다"
+        ],
+        "answer_index": 2,
+        "why_ko": "be unclear는 불분명해지는 '변화'(get unclear)도 소유도 아니라, 설명이 그 속성과 등호로 이어져 그대로 머물러 있다는 계사의 정적 그림이다. 추상 주어와 성질을 이어도 be는 머묾을 그린다."
+      },
+      {
+        "id": "be-x4",
+        "sense_id": "be-state",
+        "sentence": "Honesty ___ the most important thing in a friendship.",
+        "sentence_ko": "정직함이 우정에서 가장 중요한 거야.",
+        "subject_label": "honesty",
+        "object_label": "the most important thing",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (추상 주어를 무엇과 등호로 잇는다)",
+        "choices": [
+          "is",
+          "gets",
+          "has"
+        ],
+        "answer_index": 0,
+        "why_ko": "Honesty is the most important thing은 정직함을 '가장 중요한 것'과 등호로 잇는 계사의 정적 그림이다(그 정체에 머묾). gets는 '그 자리로 옮겨 가 닿는' 변화를 그려 일반적 정의와 안 맞고, has는 정직함이 무언가를 영역 안에 가진다는 소유라 등호 관계가 아니다 — be(등호·머묾)·get(상태로 진입)·have(영역 내 소유)의 감각 대비."
+      },
+      {
+        "id": "be-x5",
+        "sense_id": "be-exist-locate",
+        "sentence": "There ___ a strange noise coming from the engine.",
+        "sentence_ko": "엔진에서 이상한 소리가 나고 있어.",
+        "subject_label": "a strange noise",
+        "object_label": "from the engine",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (존재를 무대에 올린다)",
+        "choices": [
+          "has",
+          "is",
+          "takes"
+        ],
+        "answer_index": 1,
+        "why_ko": "There is는 이상한 소리가 엔진에서 '존재한다'고 무대에 올리는 그림이다. The engine has a noise(엔진이 소리를 영역 안에 가짐)도 문법은 되지만 There ___ 틀은 존재 도입이라 has 자리가 아니고, takes는 소리가 무언가를 능동적으로 가져간다는 그림이라 맞지 않는다 — be(존재 도입)·have(영역 내 소유)·take(능동적 가져감)의 감각 대비."
+      }
+    ]
+  },
+  "go": {
+    "axis": "core-verbs",
+    "item": "go",
+    "senses": [
+      {
+        "id": "go-away",
+        "ko": "주어가 화자/기준점에서 *멀어지는* 방향으로 움직이는 이동 감각 — come이 '기준점 쪽으로 다가옴'이라면 go는 '기준점에서 떨어져 나감'으로 방향이 정반대다(deixis). 어디로 가느냐보다 '여기(기준점)에서 멀어진다'가 핵심이다.",
+        "image": "화자가 선 자리를 기준점으로 두고, 주어가 그 자리에서 화살표를 따라 바깥의 다른 지점으로 빠져나가는 그림. come의 화살표가 바깥에서 기준점 쪽으로 들어온다면, go의 화살표는 기준점에서 바깥으로 나간다 — 점이 나로부터 멀어진다.",
+        "boundary_ko": "방향이 핵심이다 — 기준점(화자/지금 여기)에서 멀어지면 go(Go home ○ = 여기서 집 쪽으로 떠남), 기준점 쪽으로 다가오면 come(Come here ○). 같은 '집'이라도 여기서 떠나면 go home, 듣는 이 쪽으로 가면 상황에 따라 come이 된다. take(물건을 들고 멀어짐)와 달리 go는 주어 자신이 멀어지는 이동이라 목적어를 데려가는 그림이 없다.",
+        "source_refs": [
+          {
+            "source_id": "talmy-2000",
+            "locator": "Vol. II, Part 1, Ch. 1 'Lexicalization Patterns' — deictic motion verbs (path relative to the speaker's reference point: motion away from vs. toward)",
+            "claim": "영어의 이동 동사는 기준점(화자) 대비 경로의 방향(이탈/접근)을 직시적(deictic)으로 어휘화하며, go/come 같은 짝은 화자 기준 이탈(멀어짐)/접근(다가옴)의 방향 대비를 이룬다."
+          },
+          {
+            "source_id": "oald",
+            "locator": "go (verb), sense group 'move or travel from one place to another (away from the speaker or the place where the speaker is)'",
+            "claim": "go는 화자/현재 위치에서 다른 곳으로 떠나는 '멀어지는 방향'의 이동이 학습자 사전에 핵심 용법으로 실려 있으며, come(이쪽으로 다가옴)과 방향이 대비된다."
+          }
+        ],
+        "validation": {
+          "method": "subagent-consensus",
+          "strength": "weak",
+          "date": "2026-06-13",
+          "basis": "deixis 방향 대비(go=이탈/come=접근)는 take-carry(take/bring deixis)와 동일 T1(talmy-2000 위성틀·직시 이동) 계열로 정합. 사람 리뷰(approve 절차) 전까지 weak."
+        }
+      },
+      {
+        "id": "go-become",
+        "ko": "주어가 어떤 상태로 *옮겨 가 변하는* 감각 — 주로 나쁘거나 극적인 방향의 변화에 쓴다(go bad 상해 버림, go quiet 갑자기 조용해짐, go crazy 미쳐 버림). 이동 동사 go가 '멀어져 다른 상태로 떠나간다'는 그림으로 은유 확장된 자리(STATES ARE LOCATIONS) — 정상에서 멀어져 다른(흔히 나쁜) 상태로 가 버린다.",
+        "image": "주어가 원래 있던 정상 상태 자리에서 떠나, 다른 상태(흔히 나쁜·극적인 자리)로 옮겨 가 버리는 그림 — 우유가 멀쩡한 자리를 떠나 '상한' 자리로 가 버리고, 사람이 멀쩡한 자리를 떠나 '미친' 자리로 가 버린다. 머물러 있는 be가 아니라, 정상에서 벗어나 다른 상태로 떠나가는 움직임이다.",
+        "boundary_ko": "get-state-change(중립적으로 상태 자리에 옮겨 가 닿음 — get tired, get cold)와 미묘하게 갈린다: go + 형용사는 '정상에서 벗어나 (흔히 나쁜·극적인) 다른 상태로 떠나 버림'이라 부정적·일탈적 색이 강하다(go bad ○ / *go good ×, go quiet ○). 중립·바람직한 변화에는 보통 get을 쓴다(get better ○, *go better ×). 같은 변화라도 '정상을 벗어나 나빠짐'이면 go가 어울린다.",
+        "source_refs": [
+          {
+            "source_id": "lakoff-1993",
+            "locator": "The Contemporary Theory of Metaphor — Event Structure Metaphor (STATES ARE LOCATIONS, CHANGE IS MOTION)",
+            "claim": "상태는 위치, 변화는 그 위치로의 이동이라는 사건 구조 은유가 영어에 체계적으로 존재한다 — go + 형용사는 주어가 한 상태에서 다른 상태(위치)로 옮겨 가는 변화로 읽힌다."
+          },
+          {
+            "source_id": "oald",
+            "locator": "go (verb), sense 'become' — 'go + adjective' (esp. used of changes for the worse: go bad, go grey, go mad, go quiet)",
+            "claim": "학습 사전은 go + 형용사를 'become(어떤 상태가 되다)' 용법으로 기술하며, 특히 나쁜 쪽으로의 변화(go bad/mad/grey 등)에 쓰는 경향과 get(중립적 변화)과의 결 차이를 용법으로 보인다 — 예문 자연성·용법 확인(T2). 미확인 주장: 'go=부정적 변화 전용'이라는 절대 규칙은 일반화이며(go quiet 등 비부정 용례도 있어 '경향'으로만 표기), boundary_ko의 '*go good ×'는 교육용 단순화로 사용."
+          }
+        ],
+        "validation": {
+          "method": "subagent-consensus",
+          "strength": "weak",
+          "date": "2026-06-13",
+          "basis": "c4-2 동시 생성분. inchoative 변화 도식은 get-state-change와 동일 T1(lakoff-1993 사건 구조 은유) 계열 — go의 '멀어져 다른 상태로' 방향이 부정·일탈 색을 더한다. 'go=부정 전용' 절대화는 미확인(경향 표기). strong 승격은 사람 리뷰(approve 절차) 대기."
+        }
+      }
+    ],
+    "training_items": [
+      {
+        "id": "go-t1",
+        "sense_id": "go-away",
+        "sentence": "It's getting late — I should go home now.",
+        "sentence_ko": "늦었네 — 이제 집에 가야겠어.",
+        "subject_label": "I",
+        "object_label": "home (moving away to)",
+        "type": "sense-choice",
+        "prompt": "이 go가 그리는 그림은?",
+        "choices": [
+          "내가 지금 이 자리를 떠나 집 쪽으로 멀어져 간다",
+          "집이 멀리서 내가 서 있는 이 자리 쪽으로 점점 다가온다",
+          "내가 집 안의 한자리에 가만히 머물러 그대로 있다"
+        ],
+        "answer_index": 0,
+        "why_ko": "go home은 내가 지금 있는 기준점(여기)에서 멀어져 집 쪽으로 떠나가는 이동이다. 이쪽으로 다가오는 거라면 come이 되니, go는 '여기서 멀어지는 방향'을 그린다."
+      },
+      {
+        "id": "go-t2",
+        "sense_id": "go-away",
+        "sentence": "She went to the library to return her books.",
+        "sentence_ko": "그녀는 책을 반납하러 도서관에 갔어.",
+        "subject_label": "she",
+        "object_label": "the library (moving away to)",
+        "type": "sense-choice",
+        "prompt": "이 went가 그리는 그림으로 가장 가까운 것은?",
+        "choices": [
+          "그녀가 멀리 떨어진 도서관에서 지금 이 기준 자리 쪽으로 다가왔다",
+          "그녀가 지금 기준 자리에서 멀어져 도서관 쪽으로 떠나갔다",
+          "그녀가 도서관 안에 줄곧 처음부터 자리 잡고 앉아 있었다"
+        ],
+        "answer_index": 1,
+        "why_ko": "go to the library는 그녀가 기준점(여기)에서 멀어져 도서관이라는 다른 지점으로 떠나가는 이동이다. 기준점 쪽으로 다가왔다면 come이 되니, go는 멀어지는 방향이다."
+      },
+      {
+        "id": "go-t3",
+        "sense_id": "go-away",
+        "sentence": "Please go away and leave me alone for a while.",
+        "sentence_ko": "저리 가서 잠깐 나 좀 혼자 있게 해 줘.",
+        "subject_label": "you",
+        "object_label": "away (moving off from here)",
+        "type": "sense-choice",
+        "prompt": "go away는 어떤 방향의 그림인가?",
+        "choices": [
+          "상대가 멀리 있다가 내가 선 이 자리 쪽으로 바짝 다가온다",
+          "상대가 떠나지 않고 내 곁 한자리에 가만히 멈춰 서 있다",
+          "상대가 내가 있는 자리에서 점점 멀어져 떨어져 나간다"
+        ],
+        "answer_index": 2,
+        "why_ko": "go away는 상대가 내(화자)가 있는 기준점에서 멀어져 떨어져 나가는 이동이다. away가 그 '멀어짐'을 한 번 더 못박는다 — 다가오는 come here와 정반대 방향이다."
+      },
+      {
+        "id": "go-t4",
+        "sense_id": "go-become",
+        "sentence": "The milk went bad after sitting out all day.",
+        "sentence_ko": "우유가 하루 종일 밖에 나와 있더니 상해 버렸어.",
+        "subject_label": "the milk",
+        "object_label": "into a bad (spoiled) state",
+        "type": "sense-choice",
+        "prompt": "이 went bad가 그리는 그림은?",
+        "choices": [
+          "우유가 멀쩡한 상태를 떠나 '상한' 다른 상태로 옮겨 가 버렸다",
+          "우유가 처음부터 끝까지 줄곧 상한 상태 그대로 놓여 있었다",
+          "누군가 멀쩡한 우유를 상한 우유로 슬쩍 바꿔치기해 놓았다"
+        ],
+        "answer_index": 0,
+        "why_ko": "go bad는 우유가 멀쩡한(정상) 자리를 떠나 '상한'이라는 나쁜 상태로 옮겨 가 버린 변화다 — 이동 동사 go가 '정상에서 벗어나 다른 상태로 떠나간다'는 그림으로 확장된 자리다. 중립적 변화라면 get을 쓰지만, 나빠지는 일탈이라 go가 어울린다."
+      },
+      {
+        "id": "go-t5",
+        "sense_id": "go-become",
+        "sentence": "The whole room went quiet when she walked in.",
+        "sentence_ko": "그녀가 들어오자 방 전체가 조용해졌어.",
+        "subject_label": "the whole room",
+        "object_label": "into a quiet state",
+        "type": "sense-choice",
+        "prompt": "이 went quiet의 감각으로 가장 가까운 것은?",
+        "choices": [
+          "방이 그녀가 들어오기 한참 전부터 원래 줄곧 조용한 상태였다",
+          "방이 떠들썩하던 자리를 떠나 '조용한' 상태로 갑자기 옮겨 갔다",
+          "누군가 바깥의 조용함을 방 안으로 일부러 들여놓아 깔았다"
+        ],
+        "answer_index": 1,
+        "why_ko": "go quiet는 방이 원래의(떠들썩한) 상태를 떠나 '조용한' 다른 상태로 갑자기 옮겨 간 극적 변화다. 머물러 있는 be quiet가 아니라, 정상 자리에서 벗어나 다른 상태로 떠나가는 go의 그림이다."
+      },
+      {
+        "id": "go-t6",
+        "sense_id": "go-away",
+        "sentence": "We ___ to the beach every summer when I was little.",
+        "sentence_ko": "어릴 때 우리는 여름마다 바닷가에 가곤 했어.",
+        "subject_label": "we",
+        "object_label": "the beach (moving away to)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "went",
+          "came",
+          "got"
+        ],
+        "answer_index": 0,
+        "why_ko": "came to the beach면 바닷가를 기준점으로 두고 그쪽으로 다가오는 방향이고, got to the beach면 '바닷가에 도착해 닿음'이라 도달의 결과에 초점이 간다. 여기선 우리가 (집 같은) 기준점에서 멀어져 바닷가로 떠나가는 이동 자체라 went가 맞다 — go(멀어짐)·come(다가옴) deixis와 get(도착해 닿음)의 대비. 셋 다 문장은 되지만 그리는 방향·초점이 갈린다."
+      },
+      {
+        "id": "go-t7",
+        "sense_id": "go-away",
+        "sentence": "The train ___ before we reached the platform.",
+        "sentence_ko": "우리가 플랫폼에 닿기 전에 기차가 떠나 버렸어.",
+        "subject_label": "the train",
+        "object_label": "away (departing)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "arrived",
+          "left",
+          "went"
+        ],
+        "answer_index": 2,
+        "why_ko": "arrived면 기차가 우리 쪽으로 들어와 닿는 도착이라 방향이 반대다. left도 '떠남'이라 뜻은 가깝지만, go는 '기준점(우리)에서 멀어져 가 버린' 직시적 멀어짐을 그린다 — 우리가 닿기 전에 그 자리에서 멀어져 사라진 그림이라 went가 맞다. come(다가옴)과 정반대로 go는 기준점에서 멀어지는 방향이다."
+      },
+      {
+        "id": "go-t8",
+        "sense_id": "go-become",
+        "sentence": "He went pale the moment he heard the news.",
+        "sentence_ko": "그는 그 소식을 듣자마자 새파랗게 질렸어.",
+        "subject_label": "he",
+        "object_label": "into a pale state",
+        "type": "sense-choice",
+        "prompt": "이 went pale이 그리는 그림은?",
+        "choices": [
+          "그가 정상 안색을 떠나 '창백한' 상태로 갑자기 옮겨 갔다",
+          "그가 소식을 듣기 전부터 창백한 안색을 줄곧 그대로 유지하고 있었다",
+          "그가 어디선가 창백한 기운을 받아 와 손에 쥐고 있었다"
+        ],
+        "answer_index": 0,
+        "why_ko": "go pale은 그가 정상 안색(자리)을 떠나 '창백한' 다른 상태로 갑자기 옮겨 간 극적 변화다 — 머물러 있는 be pale이 아니라, 정상에서 벗어나 다른 상태로 떠나가는 go의 그림이다. the moment가 그 급변 시점을 못박는다."
+      },
+      {
+        "id": "go-t9",
+        "sense_id": "go-become",
+        "sentence": "The crowd ___ wild when the home team scored.",
+        "sentence_ko": "홈 팀이 득점하자 관중이 열광했어.",
+        "subject_label": "the crowd",
+        "object_label": "into a wild state",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "was",
+          "went",
+          "stayed"
+        ],
+        "answer_index": 1,
+        "why_ko": "was wild면 열광한 상태에 머물러 있음이고, stayed wild면 그 상태에 계속 머물러 있음이라 둘 다 변화가 없다. 여기선 관중이 차분하던 자리를 떠나 '열광한(wild)' 극적 상태로 갑자기 옮겨 간 변화라 went가 맞다 — go가 '정상에서 벗어나 격한 다른 상태로 떠나감'을 그린다. be/stay(머묾)와 go(상태로 떠나감)의 대비."
+      },
+      {
+        "id": "go-t10",
+        "sense_id": "go-away",
+        "sentence": "I have to ___ to work even on the weekend this week.",
+        "sentence_ko": "이번 주는 주말에도 일하러 가야 해.",
+        "subject_label": "I",
+        "object_label": "work (moving away to)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (경계 문항 — 보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "go",
+          "come",
+          "get"
+        ],
+        "answer_index": 0,
+        "why_ko": "come to work면 듣는 이가 있는 직장 쪽으로 다가가는 상대 기준 방향이고, get to work면 '직장에 도착해 닿음'이라 도달의 결과에 초점이 간다. 여기선 내가 (집 같은) 기준점에서 멀어져 직장으로 떠나가는 이동 자체라 go가 맞다 — go(나로부터 멀어짐)·come(상대 쪽으로 다가감)·get(도착해 닿음)의 결이 갈리는 경계 자리다."
+      }
+    ],
+    "transfer_items": [
+      {
+        "id": "go-x1",
+        "sense_id": "go-away",
+        "sentence": "After graduation, many of them went abroad to find work.",
+        "sentence_ko": "졸업 후에 그들 중 다수가 일자리를 찾아 해외로 떠났어.",
+        "subject_label": "many of them",
+        "object_label": "abroad (moving away to)",
+        "type": "sense-choice",
+        "prompt": "이 went abroad가 그리는 그림으로 가장 가까운 것은?",
+        "choices": [
+          "그들이 멀리 떨어진 해외에서 본국이 있는 이쪽으로 돌아왔다",
+          "그들이 본국(기준점)을 떠나 멀리 해외로 멀어져 갔다",
+          "그들이 졸업 전부터 해외에 줄곧 자리 잡고 살고 있었다"
+        ],
+        "answer_index": 1,
+        "why_ko": "go abroad는 그들이 기준점(본국·여기)을 떠나 멀리 해외로 멀어져 가는 이동이다. 기준점 쪽으로 돌아오는 거라면 come back이 되니, go는 '여기서 멀어지는 방향'을 그린다."
+      },
+      {
+        "id": "go-x2",
+        "sense_id": "go-become",
+        "sentence": "The bread had gone stale by the time we found it.",
+        "sentence_ko": "우리가 발견했을 때쯤 빵은 이미 딱딱하게 굳어 있었어.",
+        "subject_label": "the bread",
+        "object_label": "into a stale state",
+        "type": "sense-choice",
+        "prompt": "이 gone stale이 그리는 그림은? (주어가 사람이 아니라 빵이다)",
+        "choices": [
+          "빵이 갓 구운 상태로 줄곧 신선하게 있었다",
+          "누군가 굳은 빵을 빵 자리에 새로 가져다 두었다",
+          "빵이 신선한(정상) 상태를 떠나 '굳은' 나쁜 상태로 옮겨 가 버렸다"
+        ],
+        "answer_index": 2,
+        "why_ko": "go stale은 빵이 신선한(정상) 자리를 떠나 '굳은' 나쁜 상태로 옮겨 가 버린 변화다 — 주어가 사물이어도 '정상에서 벗어나 다른(나쁜) 상태로 떠나감'이라는 go의 그림은 같다. 중립적 변화라면 get이지만, 상해 가는 일탈이라 go가 어울린다."
+      },
+      {
+        "id": "go-x3",
+        "sense_id": "go-away",
+        "sentence": "Could you ___ over to the neighbor's house and ask for some sugar?",
+        "sentence_ko": "옆집에 좀 건너가서 설탕 좀 얻어다 줄래?",
+        "subject_label": "you",
+        "object_label": "over to the neighbor's (moving away to)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "go",
+          "come",
+          "get"
+        ],
+        "answer_index": 0,
+        "why_ko": "come over면 화자가 있는 이 자리 쪽으로 건너오는 방향이라 '옆집으로 건너가라'와 어긋나고, get over는 '극복하다/넘어오다'로 결이 다르다. 여기선 듣는 이가 지금 이 자리(기준점)를 떠나 옆집으로 멀어져 가는 이동이라 go가 맞다 — go(여기서 멀어짐)·come(이쪽으로 다가옴) deixis 대비가 핵심이다."
+      },
+      {
+        "id": "go-x4",
+        "sense_id": "go-become",
+        "sentence": "After the lead engineer quit, the whole project quickly ___ downhill.",
+        "sentence_ko": "수석 엔지니어가 그만둔 뒤로 프로젝트 전체가 빠르게 내리막을 탔어.",
+        "subject_label": "the whole project",
+        "object_label": "into a declining state",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "stayed",
+          "went",
+          "got"
+        ],
+        "answer_index": 1,
+        "why_ko": "stayed downhill은 비문에 가깝고, got downhill도 결합이 어색해 표준이 아니다. go downhill은 '정상 자리를 떠나 내리막(나빠지는) 상태로 옮겨 가 버림'을 그리는 굳은 표현이라 여기선 went가 표준이다 — go(정상에서 벗어나 나쁜 상태로 떠나감)의 일탈·악화 색이 또렷이 살아 get로 바꾸기 어려운 자리다."
+      },
+      {
+        "id": "go-x5",
+        "sense_id": "go-away",
+        "sentence": "He quietly slipped out the back door and went off into the night.",
+        "sentence_ko": "그는 조용히 뒷문으로 빠져나가 밤 속으로 사라졌어.",
+        "subject_label": "he",
+        "object_label": "off into the night (moving away)",
+        "type": "sense-choice",
+        "prompt": "이 went off가 그리는 그림으로 가장 가까운 것은?",
+        "choices": [
+          "그가 밤 속에서 화자가 선 자리 쪽으로 다가왔다",
+          "그가 뒷문 앞 자리에 가만히 멈춰 서 있었다",
+          "그가 이 자리에서 멀어져 밤 속으로 떠나가 사라졌다"
+        ],
+        "answer_index": 2,
+        "why_ko": "go off into the night은 그가 기준점(이 자리)에서 멀어져 밤 속으로 떠나가 사라진 이동이다 — slipped out과 이어지는 '여기서 멀어짐'은 come(다가옴)이 아니라 go의 방향이다."
+      }
+    ]
+  },
+  "come": {
+    "axis": "core-verbs",
+    "item": "come",
+    "senses": [
+      {
+        "id": "come-toward",
+        "ko": "주어가 화자/기준점 *쪽으로 다가오는* 방향의 이동 감각 — go가 '기준점에서 멀어짐'이라면 come은 '기준점으로 다가옴'으로 방향이 정반대다(deixis). 기준점은 꼭 화자만이 아니라 *듣는 이*가 될 수도 있어, 상대 쪽으로 다가갈 때도 come을 쓴다.",
+        "image": "기준점(화자 또는 듣는 이가 선 자리)을 향해, 주어가 바깥에서 화살표를 따라 그 자리 쪽으로 들어오는 그림. go의 화살표가 기준점에서 바깥으로 나간다면, come의 화살표는 바깥에서 기준점 안쪽으로 들어온다 — 점이 기준점에 가까워진다.",
+        "boundary_ko": "방향이 핵심이다 — 기준점 쪽으로 다가오면 come(Come here ○), 기준점에서 멀어지면 go(Go away ○). 한국인 함정: 누가 '밥 먹어!'라고 부를 때 한국어는 '갈게'라 영어로 I'm going이라 하기 쉽지만, 영어는 *부른 사람(듣는 이)의 자리*를 기준점으로 잡아 그쪽으로 다가가므로 I'm coming이 맞다(전화로 '지금 갈게'도 I'm coming). '가다=go'라는 번역 등치가 deixis 방향을 뒤집는 대표 함정이다.",
+        "source_refs": [
+          {
+            "source_id": "talmy-2000",
+            "locator": "Vol. II, Part 1, Ch. 1 'Lexicalization Patterns' — deictic motion verbs (path toward the speaker/addressee reference point vs. away)",
+            "claim": "영어의 이동 동사는 기준점(화자, 때로 듣는 이) 대비 경로의 방향(접근/이탈)을 직시적(deictic)으로 어휘화하며, come/go 같은 짝은 기준점 접근(다가옴)/이탈(멀어짐)의 방향 대비를 이룬다 — 기준점이 듣는 이로 이동할 수 있다."
+          },
+          {
+            "source_id": "oald",
+            "locator": "come (verb), sense 'move toward or visit the place where the speaker or listener is'",
+            "claim": "come은 화자 또는 듣는 이가 있는 곳 쪽으로 다가오거나 그곳을 방문하는 '접근 방향'의 이동이 학습자 사전에 핵심 용법으로 실려 있으며, go(멀어짐)와 방향이 대비된다 — 부름에 답할 때 I'm coming을 쓰는 용례 포함."
+          }
+        ],
+        "validation": {
+          "method": "subagent-consensus",
+          "strength": "weak",
+          "date": "2026-06-13",
+          "basis": "deixis 방향 대비(come=접근/go=이탈, 기준점이 듣는 이로 이동)는 take-carry(take/bring deixis)와 동일 T1(talmy-2000) 계열로 정합. I'm coming 함정은 oald 용례 + misconceptions.md(bring/take deixis)와 같은 계열. 사람 리뷰(approve 절차) 전까지 weak."
+        }
+      },
+      {
+        "id": "come-emerge",
+        "ko": "숨어 있던 것이 *나타나거나*, 결과로 *생겨나 드러나는* 감각 — come out(밖으로 드러남), come true(이루어져 나타남), come up(불쑥 떠오름)처럼 보이지 않던 것이 시야·존재로 들어온다. 이동 동사 come의 '이쪽으로 들어옴'이 '없던/숨었던 것이 드러남 쪽으로 들어옴'으로 확장된 자리다.",
+        "image": "감춰져 있거나 아직 없던 것이, 가려진 곳에서 화살표를 따라 드러나는 쪽(시야·현실)으로 나와 모습을 보이는 그림 — 별이 어둠 속에서 떠오르고, 꿈이 현실이라는 자리로 나와 이루어진다. 어디서 와 닿는다기보다, 보이지 않던 것이 보이는 쪽으로 솟아 나온다.",
+        "boundary_ko": "come-toward(특정 기준점으로 다가오는 물리 이동)와 갈린다: come-emerge는 '드러남·생겨남'이라 다가오는 출발점·기준점이 또렷하지 않고, 숨었던 것이 모습을 보이는 *출현*에 초점이 있다(The truth came out — 진실이 어디서 다가온 게 아니라 드러남). out-reveal(밖으로 드러남, find out)과 결이 겹치지만, come은 '드러나는 쪽으로 나오는 이동' 자체를 동사가 떠맡는다.",
+        "source_refs": [
+          {
+            "source_id": "lakoff-1993",
+            "locator": "The Contemporary Theory of Metaphor — event/appearance mapping (coming into existence/view as motion into a location)",
+            "claim": "존재·출현을 '어떤 자리(시야·현실)로 들어오는 이동'으로 보는 은유가 영어에 체계적으로 존재한다 — come true/come out 등은 보이지 않던 것이 드러나는 쪽으로 나오는 이동으로 읽힌다."
+          },
+          {
+            "source_id": "oald",
+            "locator": "come (verb), sense group 'come into existence / become visible or known' (come out, come true, come up)",
+            "claim": "학습 사전은 come을 '생겨나다·나타나다·알려지다'(come true, come out, come up) 용법으로 기술하며, 숨어 있던 것이 드러나거나 결과로 나타나는 출현 의미를 표준 용법으로 싣는다 — 예문 자연성·용법 확인(T2). 미확인 주장: come-emerge를 단일 인지 도식으로 묶는 이론적 통합은 교육용 묶음이며, 개별 관용(come up=화제로 떠오름 등)의 관용성 정도는 본 출처가 직접 보증하지 않는다(boundary_ko에서 out-reveal과의 결 차이로만 제한)."
+          }
+        ],
+        "validation": {
+          "method": "subagent-consensus",
+          "strength": "weak",
+          "date": "2026-06-13",
+          "basis": "c4-2 동시 생성분. 출현·생겨남을 '드러나는 쪽으로의 이동'으로 보는 도식은 lakoff-1993 사건/은유 계열 + oald 용법. 개별 관용의 관용성·단일 도식 통합은 미확인(교육용 묶음 표기). strong 승격은 사람 리뷰(approve 절차) 대기."
+        }
+      }
+    ],
+    "training_items": [
+      {
+        "id": "come-t1",
+        "sense_id": "come-toward",
+        "sentence": "Come here and sit next to me for a minute.",
+        "sentence_ko": "이리 와서 잠깐 내 옆에 앉아.",
+        "subject_label": "you",
+        "object_label": "here (moving toward the speaker)",
+        "type": "sense-choice",
+        "prompt": "이 come이 그리는 그림은?",
+        "choices": [
+          "상대가 내가 있는 이 자리 쪽으로 다가온다",
+          "상대가 내가 있는 자리에서 점점 멀어져 떠나간다",
+          "상대가 멀찍이 떨어진 다른 자리에 가만히 멈춰 서 있다"
+        ],
+        "answer_index": 0,
+        "why_ko": "come here는 상대가 화자(나)가 있는 기준점 쪽으로 다가오는 이동이다. 여기서 멀어지는 거라면 go away가 되니, come은 '이쪽으로 다가오는 방향'을 그린다."
+      },
+      {
+        "id": "come-t2",
+        "sense_id": "come-toward",
+        "sentence": "A lot of people came to the party last night.",
+        "sentence_ko": "어젯밤 파티에 많은 사람이 왔어.",
+        "subject_label": "a lot of people",
+        "object_label": "the party (moving toward the venue)",
+        "type": "sense-choice",
+        "prompt": "이 came이 그리는 그림으로 가장 가까운 것은?",
+        "choices": [
+          "사람들이 파티 장소에서 각자 자기 집 쪽으로 뿔뿔이 흩어져 떠났다",
+          "사람들이 파티가 열리는 그 자리(기준점) 쪽으로 모여 들어왔다",
+          "사람들이 파티가 시작되기 한참 전부터 그 장소에 줄곧 있었다"
+        ],
+        "answer_index": 1,
+        "why_ko": "come to the party는 사람들이 파티가 열리는 자리(기준점) 쪽으로 다가와 모여드는 이동이다. 그 자리에서 멀어져 떠났다면 go가 되니, come은 기준점으로 다가오는 방향이다."
+      },
+      {
+        "id": "come-t3",
+        "sense_id": "come-toward",
+        "sentence": "Dinner's ready! — I'm coming!",
+        "sentence_ko": "밥 다 됐어! — 지금 가요!",
+        "subject_label": "I",
+        "object_label": "toward the speaker who called",
+        "type": "sense-choice",
+        "prompt": "한국어로는 '가요'인데 왜 영어는 coming일까? (deixis 함정 — 경계 문항)",
+        "choices": [
+          "내가 부른 사람이 있는 자리(기준점) 쪽으로 다가가므로 come이다",
+          "내가 지금 이 방에서 멀어져 나가므로, 멀어짐을 그리는 게 맞다",
+          "밥상이 내 쪽으로 다가오므로 come이다"
+        ],
+        "answer_index": 0,
+        "why_ko": "한국어 '갈게/가요'에 끌려 I'm going이라 하기 쉽지만, 영어는 *부른 사람(듣는 이)이 있는 식탁 자리*를 기준점으로 잡아 그쪽으로 다가가므로 I'm coming이 맞다. '가다=go'라는 번역 등치가 deixis 방향을 뒤집는 대표 함정 — 기준점이 듣는 이 쪽이면 다가감은 come이다."
+      },
+      {
+        "id": "come-t4",
+        "sense_id": "come-emerge",
+        "sentence": "The stars slowly came out once the clouds cleared.",
+        "sentence_ko": "구름이 걷히자 별들이 천천히 모습을 드러냈어.",
+        "subject_label": "the stars",
+        "object_label": "out (emerging into view)",
+        "type": "sense-choice",
+        "prompt": "이 came out이 그리는 그림은?",
+        "choices": [
+          "구름과 함께 별들이 하늘에서 땅으로 우수수 떨어져 내렸다",
+          "숨어 있던 별들이 보이는 쪽으로 나와 모습을 드러냈다",
+          "별들이 멀리서 땅 위의 관찰자 쪽으로 바짝 다가왔다"
+        ],
+        "answer_index": 1,
+        "why_ko": "come out은 구름에 가려 보이지 않던 별이 드러나는 쪽으로 나와 모습을 보이는 출현이다 — 어디서 다가온다기보다, 숨었던 것이 시야로 솟아 나오는 그림이다. come의 '이쪽으로 들어옴'이 '드러남 쪽으로 나옴'으로 확장된 자리다."
+      },
+      {
+        "id": "come-t5",
+        "sense_id": "come-emerge",
+        "sentence": "Her childhood dream finally came true after years of work.",
+        "sentence_ko": "오랜 노력 끝에 그녀의 어릴 적 꿈이 마침내 이루어졌어.",
+        "subject_label": "her childhood dream",
+        "object_label": "true (emerging into reality)",
+        "type": "sense-choice",
+        "prompt": "이 came true의 감각으로 가장 가까운 것은?",
+        "choices": [
+          "이루어지려던 꿈이 그녀에게서 점점 멀어져 끝내 사라져 버렸다",
+          "그 꿈이 처음부터 줄곧 현실인 채로 변함없이 있어 왔다",
+          "꿈이 현실이라는 자리로 나와 이루어져 드러났다"
+        ],
+        "answer_index": 2,
+        "why_ko": "come true는 머릿속에만 있던 꿈이 '현실'이라는 자리로 나와 이루어져 드러나는 출현이다 — 없던/숨었던 것이 현실로 솟아 나온다. come의 '드러나는 쪽으로 나오는 이동'이 추상으로 확장된 자리다."
+      },
+      {
+        "id": "come-t6",
+        "sense_id": "come-toward",
+        "sentence": "Can you ___ over to my place after dinner tonight?",
+        "sentence_ko": "오늘 저녁 먹고 우리 집에 올 수 있어?",
+        "subject_label": "you",
+        "object_label": "over to my place (moving toward the speaker)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "come",
+          "go",
+          "get"
+        ],
+        "answer_index": 0,
+        "why_ko": "go over to my place는 화자(나) 입장에서 보면 '나에게서 멀어지는' 방향이라 어색하고, get over는 '극복하다/넘어오다'로 결이 다르다. my place(화자가 있는 곳)가 기준점이고 듣는 이가 그쪽으로 다가오는 이동이라 come이 맞다 — come(기준점으로 다가옴)·go(기준점에서 멀어짐) deixis 대비가 핵심이다."
+      },
+      {
+        "id": "come-t7",
+        "sense_id": "come-toward",
+        "sentence": "Wait there — I'll ___ to you as soon as I finish.",
+        "sentence_ko": "거기서 기다려 — 끝나는 대로 너한테 갈게.",
+        "subject_label": "I",
+        "object_label": "to you (moving toward the listener)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (deixis 함정 — 보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "go",
+          "come",
+          "get"
+        ],
+        "answer_index": 1,
+        "why_ko": "한국어 '너한테 갈게'에 끌려 go라 하기 쉽지만, 영어는 *듣는 이(너)가 선 자리*를 기준점으로 잡아 그쪽으로 다가가므로 come to you가 맞다. go to you면 화자에게서 멀어지는 방향이라 '너에게 다가감'과 어긋나고, get to you는 '너에게 도착해 닿음'이라 결이 다르다 — 기준점이 듣는 이일 때 다가감은 come이다(I'm coming 함정과 같은 자리)."
+      },
+      {
+        "id": "come-t8",
+        "sense_id": "come-emerge",
+        "sentence": "An interesting idea came up during our discussion.",
+        "sentence_ko": "논의 중에 흥미로운 아이디어가 하나 떠올랐어.",
+        "subject_label": "an interesting idea",
+        "object_label": "up (emerging into view)",
+        "type": "sense-choice",
+        "prompt": "이 came up이 그리는 그림은?",
+        "choices": [
+          "없던 아이디어가 논의 중에 화제 위로 불쑥 떠올라 드러났다",
+          "누군가 미리 준비해 둔 아이디어를 손에 집어 들고 회의 자리에 내놓았다",
+          "이미 나와 있던 아이디어를 흘러가지 않게 단단히 붙들어 두었다"
+        ],
+        "answer_index": 0,
+        "why_ko": "come up은 없던/숨었던 아이디어가 논의 중에 화제 위로 솟아 나와 드러나는 출현이다 — 어디서 집어 오거나 붙들어 두는 게 아니라, 보이지 않던 것이 떠올라 모습을 보이는 그림이다. come의 '드러나는 쪽으로 나오는 이동'이 추상으로 확장된 자리다."
+      },
+      {
+        "id": "come-t9",
+        "sense_id": "come-emerge",
+        "sentence": "Nobody is quite sure how the whole misunderstanding ___ about.",
+        "sentence_ko": "그 오해가 어쩌다 그렇게 생겨났는지 아무도 확실히 몰라.",
+        "subject_label": "the whole misunderstanding",
+        "object_label": "about (coming into being)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "set",
+          "came",
+          "brought"
+        ],
+        "answer_index": 1,
+        "why_ko": "set about이면 '~을 시작하다'라 주어가 스스로 일에 착수하는 결이고, brought about은 '(누가) ~을 일으키다'라 일으킨 주체가 따로 있는 타동의 결이라 결이 어긋난다. 여기선 없던 오해가 어쩌다 저절로 생겨나 드러난 출현이라 came about이 맞다 — come about은 일·사태가 스스로 생겨나 나타나는 그림이다. 셋 다 'V about' 꼴로 문장은 되지만 그리는 그림이 갈린다."
+      },
+      {
+        "id": "come-t10",
+        "sense_id": "come-toward",
+        "sentence": "Just stay here in this room — the doctor will ___ to see you shortly.",
+        "sentence_ko": "이 방에서 그대로 기다리세요 — 의사 선생님이 곧 진찰하러 오실 거예요.",
+        "subject_label": "the doctor",
+        "object_label": "to see you (moving toward where the listener stays)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (경계 문항 — 보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "go",
+          "get",
+          "come"
+        ],
+        "answer_index": 2,
+        "why_ko": "stay here in this room이 듣는 이가 머무는 자리를 기준점으로 못박는다 — 화자도 그 자리(병실)를 기준으로 잡고 의사가 그쪽으로 다가오므로, go to see you(그 자리에서 멀어짐)는 어긋나고 get to see you(만나게 됨)는 도달·기회의 결로 방향이 흐려진다. 듣는 이가 머무는 자리가 기준점일 때 그쪽으로 다가감은 come이다 — go(멀어짐)가 아니다."
+      }
+    ],
+    "transfer_items": [
+      {
+        "id": "come-x1",
+        "sense_id": "come-toward",
+        "sentence": "Hundreds of birds come to this lake every winter.",
+        "sentence_ko": "겨울마다 수백 마리의 새가 이 호수로 찾아와.",
+        "subject_label": "hundreds of birds",
+        "object_label": "this lake (moving toward the reference point)",
+        "type": "sense-choice",
+        "prompt": "이 come이 그리는 그림으로 가장 가까운 것은? (주어가 사람이 아니라 새다)",
+        "choices": [
+          "새들이 이 호수를 떠나 멀리 다른 곳으로 날아가 흩어진다",
+          "새들이 이 호수(기준점) 쪽으로 날아 들어와 모여든다",
+          "새들이 겨울이고 아니고 없이 이 호수에 일 년 내내 줄곧 머무른다"
+        ],
+        "answer_index": 1,
+        "why_ko": "come to this lake는 새들이 기준으로 잡힌 이 호수 쪽으로 날아와 모여드는 이동이다 — 주어가 새여도 '기준점으로 다가옴'이라는 come의 방향은 같다. 그 자리에서 멀어져 떠났다면 go가 된다."
+      },
+      {
+        "id": "come-x2",
+        "sense_id": "come-emerge",
+        "sentence": "A clever solution to the puzzle suddenly ___ to me in the shower.",
+        "sentence_ko": "샤워하다가 그 퍼즐의 기발한 해법이 문득 떠올랐어.",
+        "subject_label": "a clever solution",
+        "object_label": "to me (surfacing into mind)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (보기 모두 문법적으로는 가능하다)",
+        "choices": [
+          "came",
+          "stayed",
+          "ran"
+        ],
+        "answer_index": 0,
+        "why_ko": "stayed to me는 비문에 가깝고, ran to me면 무언가가 나에게 달려오는 물리 이동이라 결이 다르다. 여기선 없던 해법이 머릿속에 문득 떠올라 드러나는 출현이라 came to me가 맞다 — come to me는 생각·해법이 어디 멀리서 다가오는 게 아니라 보이지 않던 것이 의식 위로 솟아 나타나는 그림이다(come-emerge). 셋 다 문장 꼴은 되지만 그리는 그림이 갈린다."
+      },
+      {
+        "id": "come-x3",
+        "sense_id": "come-toward",
+        "sentence": "Hold on — someone is calling, so I'll ___ right back to you.",
+        "sentence_ko": "잠깐만 — 누가 불러서, 금방 너한테 다시 올게.",
+        "subject_label": "I",
+        "object_label": "back to you (moving toward the listener)",
+        "type": "verb-choice",
+        "prompt": "빈칸에 들어갈 동사로 감각이 맞는 것은? (deixis 함정 — '너한테 ~올게'의 기준점은?)",
+        "choices": [
+          "go",
+          "come",
+          "get"
+        ],
+        "answer_index": 1,
+        "why_ko": "한국어 '다시 올게'를 영어로 옮길 때 '가다=go'에 끌리기 쉽지만, 듣는 이(너)가 선 자리가 기준점이라 그쪽으로 돌아가는 것은 come back to you가 맞다. go back이면 화자에게서 멀어지는 방향이라 '너에게 돌아옴'과 어긋나고, get back은 '되찾다/돌아가 닿다'로 도달의 결이라 다가오는 방향이 흐려진다 — 기준점이 듣는 이일 때 다가감·되돌아옴은 come이다(I'm coming 함정의 변주)."
+      },
+      {
+        "id": "come-x4",
+        "sense_id": "come-emerge",
+        "sentence": "A strange smell was coming from the basement.",
+        "sentence_ko": "지하실에서 이상한 냄새가 나고 있었어.",
+        "subject_label": "a strange smell",
+        "object_label": "from the basement (emerging out of)",
+        "type": "sense-choice",
+        "prompt": "이 coming from이 그리는 그림으로 가장 가까운 것은? (주어가 사람이 아니라 냄새다)",
+        "choices": [
+          "누군가 지하실에 있던 냄새를 일부러 밖으로 퍼 날랐다",
+          "지하실의 냄새가 한곳에 갇힌 채 꼼짝없이 머물러 있었다",
+          "보이지 않던 냄새가 지하실에서 새어 나와 감지되는 쪽으로 솟아 나왔다"
+        ],
+        "answer_index": 2,
+        "why_ko": "come from은 보이지 않던 냄새가 지하실에서 새어 나와 감지되는 쪽으로 솟아 나오는 출현이다 — 주어가 냄새여도 '숨어 있던 것이 드러나/감지되는 쪽으로 나옴'이라는 come의 그림은 같다. 누가 퍼 나르거나 가둬 두는 그림이 아니다."
+      },
+      {
+        "id": "come-x5",
+        "sense_id": "come-toward",
+        "sentence": "When I whistle, the dog comes running straight to me.",
+        "sentence_ko": "내가 휘파람을 불면 강아지가 곧장 나한테 달려와.",
+        "subject_label": "the dog",
+        "object_label": "to me (moving toward the speaker)",
+        "type": "sense-choice",
+        "prompt": "이 comes가 그리는 그림으로 가장 가까운 것은? (주어가 사람이 아니라 강아지다)",
+        "choices": [
+          "강아지가 화자(나)라는 기준점 쪽으로 곧장 달려 다가온다",
+          "강아지가 휘파람을 듣자마자 나에게서 멀어지는 다른 쪽으로 달려 떠나간다",
+          "강아지가 휘파람 소리를 듣고도 제자리에 가만히 멈춰 꼼짝 않는다"
+        ],
+        "answer_index": 0,
+        "why_ko": "come은 강아지가 화자(나)라는 기준점 쪽으로 곧장 달려 다가오는 이동이다 — 주어가 강아지여도 '기준점으로 다가옴'이라는 come의 방향은 같다. 나에게서 멀어졌다면 go가 되니, 기준점(나)으로 다가옴은 come이다."
       }
     ]
   },

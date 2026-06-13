@@ -1,28 +1,27 @@
-/* get-the-feel · c4-2 — 8개 감각, 128문장. C4 진화 #4 (제약형 산출, V3).
+/* get-the-feel · c4-3 — 11개 감각, 173문장. C4 콘텐츠 확장 후보.
  *
- * fresh start — c4-1(동결된 대표 후보·배포)에서 코드를 복사하지 않고 *교훈만* 재구현한다.
- * 계승 (c4-1 → 재구현): 인식 모드(오늘의 새 문장 / 감각 골라 집중) · 통계(항목×감각 추이) ·
- *   G11(질문 단서 차단) · G12(정답 후 해석) · G13(라벨 폭 fit) · G14(피드백 위계)
- *   · 공간 메타포(G1·G7·G8·G9·G16) · 분리 계약(separation-surface).
+ * 계승 — c4-2(대표·동결)의 검증된 앱을 그대로 이어받는다. *기능은 동일*, 콘텐츠만 확장.
+ *   인식 모드(오늘의 새 문장 / 감각 골라 집중) · 써보기(산출) 3단 · 통계(항목×감각 추이) ·
+ *   G11(질문 단서 차단) · G12(정답 후 해석) · G13(라벨 폭 fit) · G14(피드백 위계) ·
+ *   G15(학습 경로 선택 + 통계) · G17(산출 UX) · 공간 메타포(G1·G7·G9·G16) ·
+ *   분리 계약(separation-surface).
  *
- * c4-2 신규 — "써보기(산출)" 모드 = V3:
- *   기존 코퍼스 128문장에서 산출 과제를 *파생*(새 콘텐츠 저작 없음). 난이도 3단:
- *     ① 빈칸 타이핑(쉬움): verb-choice/sense-cloze 문항의 ___에 보기를 *지우고* 직접 타이핑.
- *        정규화 문자열 일치로 자동 채점. (고르기→인출의 반보)
- *     ② 어순 재배열(중간): 아무 문항 sentence를 단어 토큰으로 쪼개 셔플 → 탭해서 순서 배열.
- *        정규화 후 원문 단어 순서와 일치하면 정답.
- *     ③ 전문 쓰기(어려움): sentence_ko(한국어) + 목표 감각 힌트 → 영어 작성 → 모범문(원문) +
- *        자가채점 rubric 3항. **스스로 채점 — 약한 verdict** 정직 라벨 필수.
- *   인식≠산출 분리: 산출 점수는 인식 통계와 합치지 않는다 — 별도 "꺼내 쓰는 힘".
- *   전문 쓰기 자가점수는 약한 verdict로 명시.
+ * c4-3 변경점 — 신규 동사 3개(be·go·come) 노출. 각 2 sense (총 6개 신규 sense):
+ *     be-exist-locate · be-state · go-away · go-become · come-toward · come-emerge.
+ *   메타포 시각화는 기존 어휘(G1·G7·G9·G16)를 재사용·연장한다 — 정체성=감각 그림.
+ *   기능 코드(인식/산출/통계/주제선택)는 c4-2와 동일하게 작동한다.
  *
- * 데이터: window.CONTENT_ALL = 8파일 verbatim. localStorage prefix gtf-c4-2-.
+ * 이전 기록 이어받기(기존 패턴, c2-3에서 검증): gtf-c4-2- 의 days를 읽기 전용 import 해
+ *   Day 카운트·추이에 합산한다. c4-2 코퍼스(8동사)는 c4-3(11동사)의 부분집합이라 기록 유효.
+ *
+ * 데이터: window.CONTENT_ALL = 11파일 verbatim. localStorage prefix gtf-c4-3-.
  */
 (function () {
   "use strict";
 
   var ALL = window.CONTENT_ALL;
-  var STORE_PREFIX = "gtf-c4-2-";
+  var STORE_PREFIX = "gtf-c4-3-";
+  var PREV_PREFIX = "gtf-c4-2-";   // 이전 버전 — 읽기 전용 import 대상 (수정 금지)
   var TRAIN_COUNT = 15;            // 인식 일일/집중 세션 출제 수
   var TRANSFER_COUNT = 5;          // 인식 전이 세션 출제 수
   var MIN_ITEMS_PER_SESSION = 4;   // 일일 믹스 — 세션마다 골고루 최소 항목 수
@@ -30,7 +29,7 @@
 
   var app = document.getElementById("app");
 
-  var ITEM_ORDER = ["have", "get", "take", "make", "keep", "up", "out", "phrasal-up"];
+  var ITEM_ORDER = ["have", "get", "take", "make", "keep", "be", "go", "come", "up", "out", "phrasal-up"];
 
   // ===================================================================
   //  sense / 항목 메타 — 생활 한국어 라벨 (G5: 학술 용어 금지)
@@ -58,16 +57,21 @@
   // 인식 질문 렌더(renderQuestion)에서는 호출하지 않는다 (G11 단서 차단).
   var ITEM_COLOR = {
     "have": "#8a5a8f", "get": "#2f6db0", "take": "#b07b2f", "make": "#9c4f6e",
-    "keep": "#15786b", "up": "#3a6b5c", "out": "#3b7b86", "phrasal-up": "#5a59a8"
+    "keep": "#15786b", "be": "#5f6b3a", "go": "#a8523a", "come": "#357a73",
+    "up": "#3a6b5c", "out": "#3b7b86", "phrasal-up": "#5a59a8"
   };
   var ITEM_SHORT = {
     "have": "have", "get": "get", "take": "take", "make": "make",
-    "keep": "keep", "up": "up", "out": "out", "phrasal-up": "V+up"
+    "keep": "keep", "be": "be", "go": "go", "come": "come",
+    "up": "up", "out": "out", "phrasal-up": "V+up"
   };
   var ITEM_LABEL = {
     "have": "have — 영역 안에 있음", "get": "get — 밖에서 안으로 도달",
     "take": "take — 손 뻗어 잡아옴", "make": "make — 새로 빚어냄",
-    "keep": "keep — 붙들어 유지", "up": "up — 위로 / 끝까지",
+    "keep": "keep — 붙들어 유지",
+    "be": "be — 그냥 있음 / 그 상태", "go": "go — 여기서 멀어져 감",
+    "come": "come — 여기로 다가옴 / 드러남",
+    "up": "up — 위로 / 끝까지",
     "out": "out — 안에서 밖으로", "phrasal-up": "구동사 — 그림의 합"
   };
   var SENSE_LABEL = {
@@ -77,6 +81,9 @@
     "take-grasp": "손 뻗어 점유", "take-carry": "잡아 데려감",
     "make-create": "새로 빚어냄", "make-cause": "상태를 빚어냄",
     "keep-hold": "흘러나가려는 것을 붙듦", "keep-state": "상태를 붙들어 이어 감",
+    "be-exist-locate": "그냥 그 자리에 있음", "be-state": "그 상태에 머묾",
+    "go-away": "여기서 바깥으로 멀어짐", "go-become": "(흔히 나쁜) 상태로 가 버림",
+    "come-toward": "여기로 다가옴", "come-emerge": "숨었던 것이 드러나 나타남",
     "up-vertical": "아래에서 위로", "up-completion": "끝까지 차오름",
     "out-exit": "안에서 밖으로", "out-reveal": "가려진 것이 드러남",
     "compose-vertical": "합성 — 위로", "compose-completion": "합성 — 끝까지",
@@ -180,15 +187,29 @@
     for (var i = 0; i < ids.length; i++) delete set[ids[i]];
     saveSet(key, set);
   }
-  function loadDays() {
+  function loadOwnDays() {
     try {
       var raw = window.localStorage.getItem(STORE_PREFIX + "days");
       return raw ? JSON.parse(raw) : [];
     } catch (e) { return []; }
   }
+  // 이전 버전(c4-2) 날들 — 읽기 전용 import. 절대 쓰지 않는다 (기존 패턴, c2-3 검증).
+  // c4-2 코퍼스(8동사)는 c4-3(11동사)의 부분집합이라 누적 기록은 그대로 유효하다.
+  function loadPrevDays() {
+    try {
+      var raw = window.localStorage.getItem(PREV_PREFIX + "days");
+      var arr = raw ? JSON.parse(raw) : [];
+      for (var i = 0; i < arr.length; i++) arr[i].__imported = true;
+      return arr;
+    } catch (e) { return []; }
+  }
+  // Day 카운트·추이에 합산할 전체 코스 = 이전 버전 + 이번 버전 (시간순).
+  function loadDays() {
+    return loadPrevDays().concat(loadOwnDays());
+  }
   function saveDay(rec) {
     try {
-      var days = loadDays();
+      var days = loadOwnDays();
       days.push(rec);
       window.localStorage.setItem(STORE_PREFIX + "days", JSON.stringify(days));
     } catch (e) { /* 무시 */ }
@@ -604,6 +625,152 @@
     );
   }
 
+  // ===== c4-3 신규 동사 메타포 (be·go·come). 기존 어휘 재사용·연장 — 정체성=감각 그림 =====
+
+  // be-exist-locate — have의 '영역 원'과 대비: 원 없이 *그냥 그 자리에 존재/위치*한 칩.
+  //   화살표 없음. 점(스폿) 위에 칩이 내려앉아 정착(viz-settle)할 뿐. ("그냥 있다")
+  function svgBeExist(subjectLabel, objectLabel, settle, compact) {
+    var col = itemColor("be");
+    var cls = settle ? "viz-settle settle" : "viz-settle";
+    var startStyle = settle ? "" : ' style="transform: translateY(-40px); opacity:0.35;"';
+    var vb = compact ? '0 0 200 160' : '0 0 320 200';
+    var cx = compact ? 100 : 160, cy = compact ? 92 : 116;
+    var baseW = compact ? 150 : 220;
+    return (
+      '<svg viewBox="' + vb + '" role="img" aria-label="영역 원 없이 그냥 그 자리에 존재·위치한 칩 그림">' +
+        '<text x="' + cx + '" y="' + (cy - (compact ? 50 : 64)) + '" text-anchor="middle" font-size="11" fill="' + col + '">' + esc(fitText(subjectLabel, baseW, 11).text) + '</text>' +
+        // 바닥선(자리) — 영역을 둘러싸는 원이 아니라 그냥 놓이는 자리.
+        '<line x1="' + (cx - baseW / 2) + '" y1="' + (cy + 24) + '" x2="' + (cx + baseW / 2) + '" y2="' + (cy + 24) + '" stroke="#c9cbb5" stroke-width="2" stroke-dasharray="2 5"/>' +
+        // 존재 표시점 — "거기 있다(there is)"
+        '<circle cx="' + cx + '" cy="' + (cy + 24) + '" r="3.2" fill="' + col + '"/>' +
+        '<g class="' + cls + '"' + startStyle + '>' +
+          chip(cx - 52, cy - 14, 104, 36, col, objectLabel) +
+        '</g>' +
+        '<text x="' + cx + '" y="' + (cy + 42) + '" text-anchor="middle" font-size="10" fill="#9ca085">영역에 속한 게 아니라 그냥 있음</text>' +
+      '</svg>'
+    );
+  }
+  // be-state — 상태 박스 *안*에 칩이 정적으로 머묾. get의 진입 화살표 없음 — 들어오는 게 아니라 머묾.
+  function svgBeState(subjectLabel, objectLabel, settle, compact) {
+    var col = itemColor("be");
+    var cls = settle ? "viz-settle settle" : "viz-settle";
+    var startStyle = settle ? "" : ' style="opacity:0.4;"';   // 옆에서 들어오는 이동 없음 — 그 자리에 페이드인
+    var vb = compact ? '0 0 200 160' : '0 0 320 200';
+    var cx = compact ? 100 : 160, cy = compact ? 88 : 112;
+    var boxW = compact ? 150 : 210, boxH = compact ? 70 : 86;
+    var bx = cx - boxW / 2, by = cy - boxH / 2;
+    return (
+      '<svg viewBox="' + vb + '" role="img" aria-label="상태 박스 안에 주어가 정적으로 머무는 그림">' +
+        '<rect x="' + bx + '" y="' + by + '" width="' + boxW + '" height="' + boxH + '" rx="12" fill="#eef0e3" stroke="' + col + '" stroke-width="2"/>' +
+        '<text x="' + cx + '" y="' + (by + 16) + '" text-anchor="middle" font-size="11" fill="' + col + '">' + esc(fitText(objectLabel, boxW - 16, 11).text) + ' 상태</text>' +
+        '<g class="' + cls + '"' + startStyle + '>' +
+          chip(cx - 50, cy - 8, 100, 34, col, subjectLabel) +
+        '</g>' +
+        '<text x="' + cx + '" y="' + (by + boxH - 8) + '" text-anchor="middle" font-size="10" fill="#9ca085">옮겨 온 게 아니라 그 상태에 머묾 (= 등호)</text>' +
+      '</svg>'
+    );
+  }
+  // go-away — 기준점(here)에서 *바깥으로 멀어지는* 화살표. come-toward와 정반대 방향.
+  function svgGoAway(subjectLabel, objectLabel, settle, compact) {
+    var col = itemColor("go");
+    var cls = settle ? "viz-slide settle" : "viz-slide";
+    var vb = compact ? '0 0 200 150' : '0 0 320 200';
+    var hereX = compact ? 36 : 56, cy = compact ? 82 : 104;
+    var outX = compact ? 178 : 296;
+    var startStyle = settle ? "" : ' style="transform: translateX(-' + (compact ? 90 : 150) + 'px); opacity:0.4;"';
+    var chipW = compact ? 96 : 110;
+    return (
+      '<svg viewBox="' + vb + '" role="img" aria-label="기준점에서 주어가 바깥으로 멀어져 가는 그림">' +
+        // 기준점 here
+        '<circle cx="' + hereX + '" cy="' + cy + '" r="7" fill="none" stroke="#8d867d" stroke-width="2"/>' +
+        '<circle cx="' + hereX + '" cy="' + cy + '" r="2.5" fill="#8d867d"/>' +
+        '<text x="' + hereX + '" y="' + (cy - 14) + '" text-anchor="middle" font-size="10" fill="#8d867d">여기(기준점)</text>' +
+        // 바깥으로 멀어지는 화살표
+        '<line x1="' + (hereX + 12) + '" y1="' + cy + '" x2="' + (outX - 6) + '" y2="' + cy + '" stroke="' + col + '" stroke-width="3" stroke-dasharray="4 4"/>' +
+        '<path d="M' + outX + ' ' + cy + ' L' + (outX - 16) + ' ' + (cy - 8) + ' L' + (outX - 16) + ' ' + (cy + 8) + ' Z" fill="' + col + '"/>' +
+        '<text x="' + (outX - 2) + '" y="' + (cy - 14) + '" text-anchor="end" font-size="10" fill="' + col + '">멀어져 감</text>' +
+        '<g class="' + cls + '"' + startStyle + '>' +
+          chip(outX - chipW - 6, cy - 16, chipW, 34, col, subjectLabel) +
+        '</g>' +
+        '<text x="' + ((hereX + outX) / 2) + '" y="' + (cy + 40) + '" text-anchor="middle" font-size="10" fill="#9c8d86">' + esc(fitText(objectLabel, compact ? 150 : 220, 10).text) + '</text>' +
+      '</svg>'
+    );
+  }
+  // go-become — (흔히 나쁜) 상태로 옮겨가는 화살표. 정상 자리를 떠나 다른 상태 자리로 가 버림.
+  function svgGoBecome(subjectLabel, objectLabel, settle, compact) {
+    var col = itemColor("go");
+    var cls = settle ? "viz-slide settle" : "viz-slide";
+    var vb = compact ? '0 0 200 160' : '0 0 320 200';
+    var cy = compact ? 88 : 112;
+    var normX = compact ? 40 : 60, badX = compact ? 158 : 256;
+    var startStyle = settle ? "" : ' style="transform: translateX(-' + (compact ? 80 : 140) + 'px); opacity:0.4;"';
+    return (
+      '<svg viewBox="' + vb + '" role="img" aria-label="정상 상태에서 떠나 다른 상태로 옮겨 가 버리는 그림">' +
+        // 정상 자리(떠나온 곳)
+        '<rect x="' + (normX - 22) + '" y="' + (cy - 20) + '" width="44" height="40" rx="8" fill="#eef0e3" stroke="#a9ad94" stroke-width="1.5" stroke-dasharray="3 3"/>' +
+        '<text x="' + normX + '" y="' + (cy - 26) + '" text-anchor="middle" font-size="9.5" fill="#9ca085">정상</text>' +
+        // 나쁜 상태 자리(가 버린 곳)
+        '<rect x="' + (badX - 28) + '" y="' + (cy - 24) + '" width="' + (compact ? 60 : 70) + '" height="48" rx="9" fill="#f4e6e0" stroke="' + col + '" stroke-width="2"/>' +
+        '<text x="' + (badX + (compact ? 2 : 7)) + '" y="' + (cy - 30) + '" text-anchor="middle" font-size="9.5" fill="' + col + '">' + esc(fitText(objectLabel, compact ? 56 : 66, 9.5).text) + ' 상태</text>' +
+        // 화살표
+        '<line x1="' + (normX + 24) + '" y1="' + cy + '" x2="' + (badX - 34) + '" y2="' + cy + '" stroke="' + col + '" stroke-width="3" stroke-dasharray="4 4"/>' +
+        '<path d="M' + (badX - 28) + ' ' + cy + ' L' + (badX - 44) + ' ' + (cy - 8) + ' L' + (badX - 44) + ' ' + (cy + 8) + ' Z" fill="' + col + '"/>' +
+        '<g class="' + cls + '"' + startStyle + '>' +
+          chip(badX - 24, cy - 12, compact ? 56 : 66, 30, col, subjectLabel) +
+        '</g>' +
+        '<text x="' + (compact ? 100 : 160) + '" y="' + (cy + 40) + '" text-anchor="middle" font-size="10" fill="#9c8d86">정상에서 벗어나 (흔히 나쁜) 상태로 가 버림</text>' +
+      '</svg>'
+    );
+  }
+  // come-toward — 기준점(here)으로 *다가오는* 화살표. go-away의 반대 방향.
+  function svgComeToward(subjectLabel, objectLabel, settle, compact) {
+    var col = itemColor("come");
+    var cls = settle ? "viz-slide settle" : "viz-slide";
+    var vb = compact ? '0 0 200 150' : '0 0 320 200';
+    var hereX = compact ? 164 : 264, cy = compact ? 82 : 104;
+    var outX = compact ? 26 : 40;
+    var startStyle = settle ? "" : ' style="transform: translateX(' + (compact ? 90 : 150) + 'px); opacity:0.4;"';
+    var chipW = compact ? 96 : 110;
+    return (
+      '<svg viewBox="' + vb + '" role="img" aria-label="주어가 바깥에서 기준점 쪽으로 다가오는 그림">' +
+        // 기준점 here (오른쪽)
+        '<circle cx="' + hereX + '" cy="' + cy + '" r="7" fill="none" stroke="#8d867d" stroke-width="2"/>' +
+        '<circle cx="' + hereX + '" cy="' + cy + '" r="2.5" fill="#8d867d"/>' +
+        '<text x="' + hereX + '" y="' + (cy - 14) + '" text-anchor="middle" font-size="10" fill="#8d867d">여기(기준점)</text>' +
+        // 바깥에서 기준점으로 들어오는 화살표
+        '<line x1="' + (outX + 6) + '" y1="' + cy + '" x2="' + (hereX - 12) + '" y2="' + cy + '" stroke="' + col + '" stroke-width="3" stroke-dasharray="4 4"/>' +
+        '<path d="M' + (hereX - 8) + ' ' + cy + ' L' + (hereX - 24) + ' ' + (cy - 8) + ' L' + (hereX - 24) + ' ' + (cy + 8) + ' Z" fill="' + col + '"/>' +
+        '<text x="' + (outX + 4) + '" y="' + (cy - 14) + '" text-anchor="start" font-size="10" fill="' + col + '">다가옴</text>' +
+        '<g class="' + cls + '"' + startStyle + '>' +
+          chip(outX + 6, cy - 16, chipW, 34, col, subjectLabel) +
+        '</g>' +
+        '<text x="' + ((outX + hereX) / 2) + '" y="' + (cy + 40) + '" text-anchor="middle" font-size="10" fill="#5f8a85">' + esc(fitText(objectLabel, compact ? 150 : 220, 10).text) + '</text>' +
+      '</svg>'
+    );
+  }
+  // come-emerge — 가려진 것이 드러나 나타남. out-reveal 어휘 연장하되 동사(come)가 주도.
+  function svgComeEmerge(subjectLabel, _objectLabel, settle, compact) {
+    var col = itemColor("come");
+    var cls = settle ? "viz-reveal settle" : "viz-reveal";
+    var startStyle = settle ? "" : ' style="transform: translateY(18px); opacity:0.16;"';
+    var vb = compact ? '0 0 200 150' : '0 0 320 200';
+    var cx = compact ? 100 : 160, cy = compact ? 90 : 120;
+    var coverY = compact ? 38 : 50, coverH = compact ? 46 : 60, coverW = compact ? 150 : 230;
+    return (
+      '<svg viewBox="' + vb + '" role="img" aria-label="숨어 있던 것이 드러나는 쪽으로 솟아 나와 나타나는 그림">' +
+        // 솟아 나오는 화살표 (come = 드러나는 쪽으로의 이동)
+        '<line x1="' + cx + '" y1="' + (cy + 28) + '" x2="' + cx + '" y2="' + (coverY + coverH + 6) + '" stroke="' + col + '" stroke-width="2.5"/>' +
+        '<path d="M' + cx + ' ' + (coverY + coverH - 2) + ' L' + (cx - 7) + ' ' + (coverY + coverH + 14) + ' L' + (cx + 7) + ' ' + (coverY + coverH + 14) + ' Z" fill="' + col + '"/>' +
+        '<g class="' + cls + '"' + startStyle + '>' +
+          chip(cx - 52, cy - 16, 104, 36, col, subjectLabel) +
+        '</g>' +
+        '<rect x="' + (cx - coverW / 2) + '" y="' + coverY + '" width="' + coverW + '" height="' + coverH + '" rx="10" fill="#9fc1bc" opacity="0.45"/>' +
+        '<text x="' + cx + '" y="' + (coverY + 18) + '" text-anchor="middle" font-size="10" fill="#316860">숨어 있거나 아직 없던 것</text>' +
+        '<text x="' + cx + '" y="' + (cy + 36) + '" text-anchor="middle" font-size="10" fill="' + col + '">드러나는 쪽으로 솟아 나옴 (나타남)</text>' +
+      '</svg>'
+    );
+  }
+
   function svgForSense(senseId, subj, obj, settle, compact) {
     switch (senseId) {
       case "have-domain-location":
@@ -622,6 +789,18 @@
       case "make-create":
       case "make-cause":
         return svgMake(subj, obj, settle, compact);
+      case "be-exist-locate":
+        return svgBeExist(subj, obj, settle, compact);
+      case "be-state":
+        return svgBeState(subj, obj, settle, compact);
+      case "go-away":
+        return svgGoAway(subj, obj, settle, compact);
+      case "go-become":
+        return svgGoBecome(subj, obj, settle, compact);
+      case "come-toward":
+        return svgComeToward(subj, obj, settle, compact);
+      case "come-emerge":
+        return svgComeEmerge(subj, obj, settle, compact);
       case "out-exit":
         return svgOutExit(subj, obj, settle, compact);
       case "out-reveal":
@@ -631,8 +810,10 @@
         return svgUpCompletion(subj, obj, settle, compact);
       case "up-vertical":
       case "compose-vertical":
-      default:
         return svgUpVertical(subj, obj, settle, compact);
+      // 누락 sense는 안전한 기본 그림으로라도 렌더 — 절대 빈/에러 금지 (G10 교훈).
+      default:
+        return svgHave(subj, obj, settle, compact);
     }
   }
   function vizBox(senseId, subj, obj, settle, caption) {
@@ -1120,6 +1301,12 @@
     else if (id === "take-grasp") head = "get과 갈리는 자리:";
     else if (id === "take-carry") head = "bring과 갈리는 방향:";
     else if (id === "make-create" || id === "make-cause") head = "do와 갈리는 자리:";
+    else if (id === "be-exist-locate") head = "have와 갈리는 자리 (존재 vs 영역 내 소유):";
+    else if (id === "be-state") head = "get과 갈리는 자리 (머묾 vs 진입):";
+    else if (id === "go-away") head = "come과 갈리는 방향 (멀어짐 vs 다가옴):";
+    else if (id === "go-become") head = "get과 갈리는 자리 (일탈적 변화 vs 중립 변화):";
+    else if (id === "come-toward") head = "go와 갈리는 방향 (다가옴 vs 멀어짐):";
+    else if (id === "come-emerge") head = "out·come-toward와 갈리는 자리 (출현 vs 이동):";
     else if (id === "up-vertical" || id === "compose-vertical") head = "down이 서는가:";
     else if (id === "up-completion" || id === "compose-completion") head = "down이 안 서는 이유:";
     else if (id === "out-exit") head = "in으로 뒤집히는가:";
@@ -1640,7 +1827,7 @@
   //  부팅
   // ===================================================================
   if (!ALL || !ALL.have || !ALL.get || !ALL.take || !ALL.make || !ALL.keep ||
-      !ALL.up || !ALL.out || !ALL["phrasal-up"]) {
+      !ALL.be || !ALL.go || !ALL.come || !ALL.up || !ALL.out || !ALL["phrasal-up"]) {
     app.innerHTML = '<div class="card"><h2>콘텐츠를 불러오지 못했어요</h2>' +
       '<p class="muted">data.js가 같은 폴더에 있는지 확인해 주세요.</p></div>';
     return;
@@ -1651,7 +1838,7 @@
     var btn = document.getElementById("export-log");
     if (!btn) return;
     btn.addEventListener("click", function () {
-      var dump = { candidate: "c4-2", exported_at: new Date().toISOString(), note: "본인 실사용 기록 (N=1)", keys: {} };
+      var dump = { candidate: "c4-3", exported_at: new Date().toISOString(), note: "본인 실사용 기록 (N=1)", keys: {} };
       for (var i = 0; i < window.localStorage.length; i++) {
         var k = window.localStorage.key(i);
         if (k.indexOf(STORE_PREFIX) === 0) { try { dump.keys[k] = JSON.parse(window.localStorage.getItem(k)); } catch (e) { dump.keys[k] = window.localStorage.getItem(k); } }
@@ -1659,7 +1846,7 @@
       var blob = new Blob([JSON.stringify(dump, null, 2)], { type: "application/json" });
       var a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = "get-the-feel-c4-2-sessions-" + new Date().toISOString().slice(0, 10) + ".json";
+      a.download = "get-the-feel-c4-3-sessions-" + new Date().toISOString().slice(0, 10) + ".json";
       a.click();
       URL.revokeObjectURL(a.href);
     });
