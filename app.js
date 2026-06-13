@@ -825,7 +825,7 @@
     app.innerHTML =
       '<div class="card intro">' +
         '<p class="kicker">8개 감각, 120문장</p>' +
-        '<h1>have·get·take·make·<b>keep</b>·up·out·구동사 —<br>8개 감각을 <b>매일 새 문장으로</b> 익힙니다</h1>' +
+        '<h1>have · get · take · make · <b>keep</b> · up · out · 구동사 —<br>8개 감각을 <b>매일 새 문장으로</b> 익힙니다</h1>' +
         '<div class="whatsnew">이번에 바뀐 점: <b>이제 정답 후 해석을 보여드려요.</b> ' +
           '문제를 풀 때는 영어 문장만 보고 감각으로 고르고, 답을 맞힌 뒤에 한국어 해석을 함께 확인해요. ' +
           '그리고 다섯 번째 동사 <b>keep</b>(붙들어 유지)이 새로 들어왔어요.</div>' +
@@ -1004,7 +1004,7 @@
           '맞히면 다음 문항으로 자동 넘기기' +
         '</label>' +
         '<div class="btn-row">' +
-          '<button class="btn" id="next-q">' + (isLast ? "결과 보기" : "다음 문항") + '</button>' +
+          '<div class="next-row"><button class="btn" id="next-q">' + (isLast ? "결과 보기" : "다음 문항") + '</button></div>' +
         '</div>' +
       '</div>';
 
