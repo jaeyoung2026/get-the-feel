@@ -985,6 +985,16 @@
           '<span class="interp-text">' + esc(item.sentence_ko) + '</span></p>'
       : "";
 
+    // G14 — 피드백 정보 위계: 그림(차별점)은 항상 보이고, 진행 버튼은 그림 바로 아래.
+    // 말 설명(why_ko)·문법 메모(boundary)는 <details>로 접어 분량을 줄인다 (페르소나 3/3: "읽을 게 너무 많다").
+    var boundary = boundaryHtml(item);
+    var detailBlock =
+      '<details class="why-details">' +
+        '<summary>왜 그런지 / 문법 메모</summary>' +
+        '<p class="why">' + esc(item.why_ko) + '</p>' +
+        boundary +
+      '</details>';
+
     var fb = document.getElementById("feedback");
     fb.innerHTML =
       '<div class="feedback">' +
@@ -996,16 +1006,15 @@
         '</div>' +
         sentenceBlock +
         interpBlock +
-        '<p class="why">' + esc(item.why_ko) + '</p>' +
         feedbackViz(item, type, correct, fatigued) +
-        boundaryHtml(item) +
-        '<label class="autonext-toggle">' +
-          '<input type="checkbox" id="autonext"' + (autoNext ? " checked" : "") + ' /> ' +
-          '맞히면 다음 문항으로 자동 넘기기' +
-        '</label>' +
+        // 진행 버튼: 그림 바로 아래 (스크롤 지옥 회수 — 긴 설명은 이 아래로)
         '<div class="btn-row">' +
-          '<div class="next-row"><button class="btn" id="next-q">' + (isLast ? "결과 보기" : "다음 문항") + '</button></div>' +
+          '<button class="btn" id="next-q">' + (isLast ? "결과 보기" : "다음 문항") + '</button>' +
+          '<label class="autonext-toggle">' +
+            '<input type="checkbox" id="autonext"' + (autoNext ? " checked" : "") + ' /> 맞히면 자동 넘기기' +
+          '</label>' +
         '</div>' +
+        detailBlock +
       '</div>';
 
     document.getElementById("autonext").onchange = function () { saveAutoNext(this.checked); };

@@ -390,6 +390,12 @@ p { margin: 0 0 14px; }
 .info-list li { margin-bottom: 3px; }
 .info-note { font-size: 0.78rem; color: var(--ink-faint); margin: 0; }
 
-/* 피드백이 길어도 진행 버튼은 항상 손 닿는 곳에 (P3 — 스크롤 지옥 회수) */
-.next-row { position: sticky; bottom: 10px; padding-top: 8px; background: linear-gradient(transparent, var(--bg) 35%); }
-.next-row .btn { box-shadow: var(--shadow); }
+
+/* G14 — 피드백 분량 축소: 설명 접기 + 버튼을 그림 바로 아래 (페르소나 3/3 스크롤 부담 회수) */
+.btn-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 14px 0 4px; }
+.why-details { margin-top: 6px; border-top: 1px solid var(--line); padding-top: 8px; }
+.why-details summary { cursor: pointer; font-size: 0.86rem; color: var(--ink-faint); padding: 4px 0; list-style: none; }
+.why-details summary::-webkit-details-marker { display: none; }
+.why-details summary::before { content: "▸ "; color: var(--ink-faint); }
+.why-details[open] summary::before { content: "▾ "; }
+.why-details .why { margin-top: 6px; }
